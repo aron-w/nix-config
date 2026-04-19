@@ -1,0 +1,13 @@
+.direnv/
+result
+result-*
+*.qcow2
+*.iso
+*.img
+
+# Keep local machine exports and decrypted secrets out of git.
+hardware-configuration.nix
+*.agekey
+*.key
+*.pem
+*.env
