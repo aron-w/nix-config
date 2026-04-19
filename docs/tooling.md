@@ -53,3 +53,5 @@ For future `nh` activations:
 ```sh
 nh os switch . --hostname <host>
 ```
+
+See [Verification](verification.md) for Docker-based checks from Windows.

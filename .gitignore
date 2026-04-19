@@ -4,6 +4,8 @@ result-*
 *.qcow2
 *.iso
 *.img
+*.qcow
+*.raw
 
 # Keep local machine exports and decrypted secrets out of git.
 hardware-configuration.nix

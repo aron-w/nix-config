@@ -14,6 +14,11 @@
 
     flake-parts.url = "github:hercules-ci/flake-parts";
 
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -51,6 +56,18 @@
       ];
 
       flake = {
+        nixosConfigurations = {
+          dominus = inputs.nixpkgs.lib.nixosSystem {
+            system = "x86_64-linux";
+            specialArgs = {
+              inherit inputs;
+            };
+            modules = [
+              ./hosts/dominus/configuration.nix
+            ];
+          };
+        };
+
         templates = {
           nixos-host = {
             path = ./templates/nixos-host;

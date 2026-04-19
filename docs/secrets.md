@@ -20,6 +20,24 @@ When the first real host is added:
 4. Import `sops-nix.nixosModules.sops` in the host configuration.
 5. Add only encrypted files to git.
 
+## 1Password And SSH Keys
+
+1Password SSH keys are good for personal authentication: SSH into machines, sign Git commits, and access GitHub. They do not replace machine secrets that services need during boot.
+
+For NixOS services, prefer `sops-nix` with an age recipient for each host. A backup copy of the host age identity may live in 1Password, but the machine needs a local private key at activation time.
+
+`dominus` is wired to use its host SSH key as an age identity source:
+
+```text
+/etc/ssh/ssh_host_ed25519_key
+```
+
+After the host exists, derive its age public recipient:
+
+```sh
+ssh-to-age -i /etc/ssh/ssh_host_ed25519_key.pub
+```
+
 ## Do Not Store
 
 - Passwords in Nix strings.

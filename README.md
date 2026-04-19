@@ -36,6 +36,7 @@ No host has a real `nixosConfiguration` yet. Add one only after collecting the m
 - [Hosts](docs/hosts.md)
 - [Tooling](docs/tooling.md)
 - [Secrets](docs/secrets.md)
+- [Verification](docs/verification.md)
 - [AI workflow](docs/ai-workflow.md)
 - [Decisions](docs/decisions.md)
 
