@@ -29,9 +29,12 @@ Do not add a real host configuration from assumptions. Collect the facts below f
 - Interop needs with Windows paths, SSH agent, Git credentials, and Docker.
 - Work/home separation rules.
 
+## Current Hosts
+
+- `dominus`: workstation POC for coding, gaming, desktop, secrets, and remote access before becoming server-first.
+
 ## Planned Hosts
 
 - `exile`: main/gaming machine. Real hardware details are not known yet.
-- `dominus`: workstation POC for coding, gaming, desktop, secrets, and remote access before becoming server-first.
 - `wsl-home`: personal NixOS-WSL profile. Real username and interop needs are not known yet.
 - `wsl-work`: work NixOS-WSL profile. Real compliance and separation needs are not known yet.

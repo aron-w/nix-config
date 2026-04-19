@@ -40,7 +40,7 @@ nix fmt
 nix flake check
 ```
 
-The first Nix command will create `flake.lock`. Review and commit that file.
+The first Nix command may update `flake.lock` when inputs change. Review and commit that file.
 
 For future local activations:
 
