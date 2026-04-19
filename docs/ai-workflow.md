@@ -24,8 +24,9 @@ Good future requests should include:
 
 ## Review Checklist
 
-- Does the change keep host-specific facts inside `hosts/<name>/`?
-- Does reusable behavior live under `nix/modules/`?
+- Does the change keep host-specific facts inside `modules/hosts/<name>/`?
+- Is every active `.nix` file under `modules/` a top-level `flake-parts` module?
+- Does reusable behavior live under `modules/features/` or another concern-based `modules/` subtree?
 - Are unstable packages explicit?
 - Are secrets encrypted or documented as intentionally absent?
 - Do docs and commands still match the implementation?

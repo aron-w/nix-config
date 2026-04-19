@@ -1,4 +1,12 @@
+{ inputs, ... }:
+let
+  repoRoot = ../..;
+in
 {
+  imports = [
+    inputs.treefmt-nix.flakeModule
+  ];
+
   perSystem =
     { pkgs, ... }:
     {
@@ -20,12 +28,12 @@
       };
 
       checks.deadnix = pkgs.runCommand "deadnix-check" { nativeBuildInputs = [ pkgs.deadnix ]; } ''
-        deadnix --fail ${../.}
+        deadnix --fail ${repoRoot}
         touch $out
       '';
 
       checks.statix = pkgs.runCommand "statix-check" { nativeBuildInputs = [ pkgs.statix ]; } ''
-        statix check ${../.}
+        statix check ${repoRoot}
         touch $out
       '';
     };

@@ -1,5 +1,5 @@
 {
-  description = "Personal NixOS, NixOS-WSL, and Home Manager configuration scaffold";
+  description = "Personal NixOS, NixOS-WSL, and Home Manager configuration";
 
   nixConfig = {
     extra-experimental-features = [
@@ -13,6 +13,7 @@
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     flake-parts.url = "github:hercules-ci/flake-parts";
+    import-tree.url = "github:vic/import-tree";
 
     disko = {
       url = "github:nix-community/disko";
@@ -37,53 +38,5 @@
     treefmt-nix.url = "github:numtide/treefmt-nix";
   };
 
-  outputs =
-    inputs@{
-      flake-parts,
-      treefmt-nix,
-      ...
-    }:
-    flake-parts.lib.mkFlake { inherit inputs; } {
-      imports = [
-        treefmt-nix.flakeModule
-        ./nix/devshell.nix
-        ./nix/formatter.nix
-      ];
-
-      systems = [
-        "x86_64-linux"
-        "aarch64-linux"
-      ];
-
-      flake = {
-        nixosConfigurations = {
-          dominus = inputs.nixpkgs.lib.nixosSystem {
-            system = "x86_64-linux";
-            specialArgs = {
-              inherit inputs;
-            };
-            modules = [
-              ./hosts/dominus/configuration.nix
-            ];
-          };
-        };
-
-        templates = {
-          nixos-host = {
-            path = ./templates/nixos-host;
-            description = "Template for a future full NixOS host module";
-          };
-
-          nixos-wsl-host = {
-            path = ./templates/nixos-wsl-host;
-            description = "Template for a future NixOS-WSL host module";
-          };
-
-          home-profile = {
-            path = ./templates/home-profile;
-            description = "Template for a future Home Manager profile";
-          };
-        };
-      };
-    };
+  outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
 }

@@ -1,6 +1,6 @@
 # AGENTS.md
 
-This repo is a scaffold for personal NixOS, NixOS-WSL, Home Manager, and secret management configuration.
+This repo is a personal NixOS, NixOS-WSL, Home Manager, and secret management configuration.
 
 ## Read First
 
@@ -25,11 +25,13 @@ This repo is a scaffold for personal NixOS, NixOS-WSL, Home Manager, and secret 
 - Do not commit plaintext secrets, private keys, tokens, passwords, or generated age identities.
 - Do not add `nixosConfigurations` until the host facts listed in [docs/hosts.md](docs/hosts.md) are known.
 - Prefer stable `nixpkgs`; use `nixpkgs-unstable` only when a package is explicitly called out as needing it.
-- Keep reusable NixOS modules under `nix/modules/nixos/` and reusable Home Manager modules under `nix/modules/home/`.
+- Use the Dendritic Pattern under `modules/`: every active `.nix` file there is a top-level `flake-parts` module.
+- Expose reusable lower-level modules through `flake.modules.nixos.*` and `flake.modules.homeManager.*`.
+- Keep host-specific facts under `modules/hosts/<name>/`.
 - Keep `README.md` concise for humans. Put durable conventions in `docs/`.
 - Do not run destructive git commands unless the user explicitly asks.
 - After structural changes, run `nix fmt` and `nix flake check` when Nix is available.
 
 ## Current Scope
 
-The repo is scaffold-only. `exile`, `dominus`, `wsl-home`, and `wsl-work` are planned host targets, not complete configurations.
+`dominus` is a concrete workstation POC host. `exile`, `wsl-home`, and `wsl-work` are planned targets, not complete configurations.

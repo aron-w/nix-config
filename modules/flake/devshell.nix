@@ -1,13 +1,6 @@
-{ inputs, ... }:
 {
   perSystem =
-    { pkgs, system, ... }:
-    let
-      pkgsUnstable = import inputs.nixpkgs-unstable {
-        inherit system;
-        config.allowUnfree = true;
-      };
-    in
+    { pkgs, ... }:
     {
       devShells.default = pkgs.mkShellNoCC {
         packages = [
@@ -26,7 +19,7 @@
           pkgs.ssh-to-age
           pkgs.statix
 
-          pkgsUnstable.nh
+          pkgs.unstable.nh
         ];
 
         shellHook = ''

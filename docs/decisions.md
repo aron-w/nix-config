@@ -6,6 +6,8 @@ Record structural choices here before future agents change them.
 
 - Use flakes.
 - Use `flake-parts` for top-level composition.
+- Use the Vimjoyer-style Dendritic Pattern: active repo-owned Nix modules live under `modules/` and are imported by `vic/import-tree`.
+- Keep `flake.nix` handwritten. Do not use generated flakes via `vic/flake-file`.
 - Use stable Nixpkgs by default with explicit selective unstable access.
 - Use Home Manager as a NixOS module for full NixOS and NixOS-WSL hosts.
 - Use `sops-nix` with `age` for encrypted secrets.
@@ -15,6 +17,7 @@ Record structural choices here before future agents change them.
 - Use `treefmt-nix` for `nix fmt` and formatting checks.
 - Keep AI guidance tool-agnostic: durable docs in `docs/`, thin agent entrypoint in `AGENTS.md`.
 - Start with local rebuild workflows. Do not add `deploy-rs` or `colmena` yet.
+- Defer reusable profiles until at least two hosts share the same feature bundle.
 
 ## Deferred
 
