@@ -6,6 +6,32 @@ The repo uses the Vimjoyer-style Dendritic Pattern: `flake.nix` delegates to `vi
 
 ## Quick Start
 
+Bootstrap an existing NixOS, WSL, or Linux machine that already has Nix:
+
+```sh
+nix --extra-experimental-features "nix-command flakes" run github:aron-w/nix-config#bootstrap -- --yes
+```
+
+Fresh `dominus` install from the NixOS installer USB, after verifying the target disk:
+
+```sh
+nix --extra-experimental-features "nix-command flakes" run github:aron-w/nix-config#bootstrap -- --mode install --host dominus --yes --i-understand-this-wipes-the-disk
+```
+
+After the first graphical login, finish 1Password Git SSH setup:
+
+```sh
+nix --extra-experimental-features "nix-command flakes" run github:aron-w/nix-config#bootstrap -- --mode auth --yes
+```
+
+On Linux or WSL without Nix, install Nix first:
+
+```sh
+curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
+```
+
+Day-to-day work inside a checkout:
+
 ```sh
 direnv allow
 nix develop

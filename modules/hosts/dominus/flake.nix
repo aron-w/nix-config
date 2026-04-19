@@ -30,6 +30,7 @@ in
         home-manager.users.aron = {
           imports = [
             homeModules."features-coding"
+            homeModules."features-onepassword-ssh"
             homeModules."features-ssh"
             homeModules."hosts-dominus-aron"
           ];
