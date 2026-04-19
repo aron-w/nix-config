@@ -16,5 +16,9 @@
         ];
       };
     };
+
+    programs._1password-gui.polkitPolicyOwners = [
+      "aron"
+    ];
   };
 }

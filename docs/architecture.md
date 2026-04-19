@@ -9,13 +9,13 @@ This repo uses the Vimjoyer-style Dendritic Pattern with `flake-parts` and `vic/
 - Files are grouped by concern, not by output type.
 - Reusable lower-level modules are exposed through `flake.modules.nixos.*` and `flake.modules.homeManager.*`.
 - Host outputs are defined beside the host under `modules/hosts/<name>/`.
-- Templates, docs, scripts, secrets, editor settings, and agent metadata stay outside `modules/` unless they are active `flake-parts` modules.
+- Docs, scripts, secrets, editor settings, and agent metadata stay outside `modules/` unless they are active `flake-parts` modules.
 
 ## Layers
 
-- `modules/flake/` owns supported systems, templates, dev shells, formatters, and checks.
+- `modules/flake/` owns supported systems, dev shells, formatters, checks, and flake-level module plumbing.
 - `modules/nix/` owns Nix-wide integrations such as Home Manager, Disko, SOPS, and explicit unstable package access.
-- `modules/features/` owns reusable behavior such as coding tools, desktop sessions, gaming, remote access, containers, SSH, and secrets wiring.
+- `modules/features/` owns reusable behavior such as coding tools, desktop sessions, gaming, remote access, containers, and SSH.
 - `modules/hosts/<name>/` owns host-specific composition and facts: hardware, boot, filesystems, network identity, users, and host state versions.
 - `secrets/` is for encrypted SOPS files only.
 - `scripts/` is for small host-independent helper commands.

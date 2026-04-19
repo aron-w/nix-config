@@ -40,12 +40,7 @@
 
       programs = {
         _1password.enable = true;
-        _1password-gui = {
-          enable = true;
-          polkitPolicyOwners = [
-            "aron"
-          ];
-        };
+        _1password-gui.enable = true;
       };
     };
 }

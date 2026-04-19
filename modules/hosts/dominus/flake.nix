@@ -19,7 +19,6 @@ in
       nixosModules."features-desktop-plasma"
       nixosModules."features-gaming"
       nixosModules."features-remote-access"
-      nixosModules."features-secrets"
       nixosModules."features-ssh"
 
       nixosModules."hosts-dominus"
