@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos."hosts-izrao-users" =
+  flake.modules.nixos."hosts-izaro-users" =
     { pkgs, ... }:
     {
       users = {

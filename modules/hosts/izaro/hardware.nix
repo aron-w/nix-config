@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos."hosts-izrao-hardware" =
+  flake.modules.nixos."hosts-izaro-hardware" =
     { config, lib, ... }:
     {
       boot = {

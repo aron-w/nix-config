@@ -1,6 +1,6 @@
-# Izrao Install
+# Izaro Install
 
-`izrao` is the NixOS profile for the current Windows gaming and coding workstation.
+`izaro` is the NixOS profile for the current Windows gaming and coding workstation.
 
 ## Hardware Facts
 
@@ -19,7 +19,7 @@ Do not target the current Windows boot disk unless Windows is meant to be wiped.
 
 ## Included Workflow
 
-The `izrao` host imports:
+The `izaro` host imports:
 
 - Plasma 6 Wayland for the reliable default desktop.
 - Hyprland as an optional power-user Wayland session.
@@ -38,7 +38,7 @@ lsblk -o NAME,SIZE,MODEL,SERIAL,TYPE,MOUNTPOINTS
 ls -l /dev/disk/by-id/
 ```
 
-Then edit `modules/hosts/izrao/disk.nix` and replace:
+Then edit `modules/hosts/izaro/disk.nix` and replace:
 
 ```nix
 "/dev/disk/by-id/REPLACE_WITH_TARGET_SSD"
@@ -63,13 +63,13 @@ Use this when a fresh internal SSD is installed and ready to become the NixOS di
 3. Run the install wizard:
 
 ```sh
-nix --extra-experimental-features "nix-command flakes" run github:aron-w/nix-config#bootstrap -- --mode install-wizard --host izrao --yes --i-understand-this-wipes-the-disk
+nix --extra-experimental-features "nix-command flakes" run github:aron-w/nix-config#bootstrap -- --mode install-wizard --host izaro --yes --i-understand-this-wipes-the-disk
 ```
 
 Short wrapper for the same flow:
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/aron-w/nix-config/main/scripts/install-izrao.sh | sh
+curl -fsSL https://raw.githubusercontent.com/aron-w/nix-config/main/scripts/install-izaro.sh | sh
 ```
 
 The wizard will:
@@ -77,7 +77,7 @@ The wizard will:
 - clone or update the repo,
 - show `lsblk` output and `/dev/disk/by-id` candidates,
 - ask for the exact target SSD path,
-- temporarily inject that path into the `izrao` disk module,
+- temporarily inject that path into the `izaro` disk module,
 - run `disko`, `nixos-install`, and the first password prompt.
 
 4. If you want the manual fallback instead, clone the repo and enter it:
@@ -87,13 +87,13 @@ git clone https://github.com/aron-w/nix-config.git
 cd nix-config
 ```
 
-5. Replace the placeholder disk in `modules/hosts/izrao/disk.nix` with the fresh SSD's `/dev/disk/by-id/...` path.
+5. Replace the placeholder disk in `modules/hosts/izaro/disk.nix` with the fresh SSD's `/dev/disk/by-id/...` path.
 6. Format, install, and set the local password:
 
 ```sh
 nix --extra-experimental-features "nix-command flakes" flake check
-sudo nix --extra-experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode disko --flake .#izrao
-sudo nixos-install --flake .#izrao
+sudo nix --extra-experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode disko --flake .#izaro
+sudo nixos-install --flake .#izaro
 sudo nixos-enter --root /mnt -c "passwd aron"
 ```
 
@@ -110,6 +110,6 @@ Use this when you want a reversible staging system before touching the internal 
 1. Boot the NixOS installer USB in UEFI mode with the external SSD attached.
 2. Run the same install wizard from Path 1 and choose the external SSD's `/dev/disk/by-id/...` path.
 3. Reboot into the external SSD and validate the desktop, Steam, Codex, GitHub SSH, and hardware behavior.
-4. After the fresh internal SSD is installed, rerun the same wizard and choose the internal SSD, or use the manual fallback and update `modules/hosts/izrao/disk.nix` before `disko` and `nixos-install`.
+4. After the fresh internal SSD is installed, rerun the same wizard and choose the internal SSD, or use the manual fallback and update `modules/hosts/izaro/disk.nix` before `disko` and `nixos-install`.
 
-The external SSD path gives you a bootable NixOS workspace with this repo, Nix, Git, and the full `izrao` tooling before the final internal install.
+The external SSD path gives you a bootable NixOS workspace with this repo, Nix, Git, and the full `izaro` tooling before the final internal install.

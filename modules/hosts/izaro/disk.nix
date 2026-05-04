@@ -1,16 +1,16 @@
 {
-  flake.modules.nixos."hosts-izrao-disk" =
+  flake.modules.nixos."hosts-izaro-disk" =
     {
       config,
       lib,
       ...
     }:
     {
-      options.awe.hosts.izrao.installDisk = lib.mkOption {
+      options.awe.hosts.izaro.installDisk = lib.mkOption {
         type = lib.types.str;
         default = "/dev/disk/by-id/REPLACE_WITH_TARGET_SSD";
         description = ''
-          Disko target for Izrao installs. Replace this with the verified
+          Disko target for Izaro installs. Replace this with the verified
           /dev/disk/by-id path for the fresh internal SSD or external bootstrap SSD.
         '';
       };
@@ -18,7 +18,7 @@
       config.disko.devices = {
         disk.system = {
           type = "disk";
-          device = config.awe.hosts.izrao.installDisk;
+          device = config.awe.hosts.izaro.installDisk;
           content = {
             type = "gpt";
             partitions = {

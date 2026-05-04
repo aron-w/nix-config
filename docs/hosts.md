@@ -32,7 +32,7 @@ Do not add a real host configuration from assumptions. Collect the facts below f
 ## Current Hosts
 
 - `dominus`: workstation POC for coding, gaming, desktop, secrets, and remote access before becoming server-first.
-- `izrao`: current Windows gaming and coding workstation target; hardware facts are known from Windows, while install disk selection must be verified from the NixOS installer.
+- `izaro`: current Windows gaming and coding workstation target; hardware facts are known from Windows, while install disk selection must be verified from the NixOS installer.
 
 ## Planned Hosts
 

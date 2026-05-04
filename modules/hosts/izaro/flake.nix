@@ -4,7 +4,7 @@ let
   nixosModules = inputs.self.modules.nixos;
 in
 {
-  flake.nixosConfigurations.izrao = inputs.nixpkgs.lib.nixosSystem {
+  flake.nixosConfigurations.izaro = inputs.nixpkgs.lib.nixosSystem {
     system = "x86_64-linux";
     modules = [
       nixosModules."nix-settings"
@@ -21,10 +21,10 @@ in
       nixosModules."features-power-user"
       nixosModules."features-ssh"
 
-      nixosModules."hosts-izrao"
-      nixosModules."hosts-izrao-disk"
-      nixosModules."hosts-izrao-hardware"
-      nixosModules."hosts-izrao-users"
+      nixosModules."hosts-izaro"
+      nixosModules."hosts-izaro-disk"
+      nixosModules."hosts-izaro-hardware"
+      nixosModules."hosts-izaro-users"
 
       {
         home-manager.users.aron = {
@@ -33,7 +33,7 @@ in
             homeModules."features-onepassword-ssh"
             homeModules."features-power-user"
             homeModules."features-ssh"
-            homeModules."hosts-izrao-aron"
+            homeModules."hosts-izaro-aron"
           ];
         };
       }

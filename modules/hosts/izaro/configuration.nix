@@ -1,7 +1,7 @@
 {
-  flake.modules.nixos."hosts-izrao" = {
+  flake.modules.nixos."hosts-izaro" = {
     networking = {
-      hostName = "izrao";
+      hostName = "izaro";
       networkmanager.enable = true;
       firewall.enable = true;
     };
