@@ -9,6 +9,8 @@ The repo uses durable documentation plus a thin `AGENTS.md`.
 - Read `docs/decisions.md` before changing structure.
 - Read `docs/hosts.md` before adding host outputs.
 - Prefer small, reviewable changes.
+- Use the `conventional-commits` skill when preparing commits or history.
+- Split commits by reviewable intent. Each cohesive change should usually land in its own Conventional Commit so rollback, review, and `git bisect` stay practical.
 - Validate with `nix fmt` and `nix flake check` when Nix is available.
 - Never invent host facts, usernames, SSH keys, disks, or secrets.
 
@@ -30,3 +32,4 @@ Good future requests should include:
 - Are unstable packages explicit?
 - Are secrets encrypted or documented as intentionally absent?
 - Do docs and commands still match the implementation?
+- If commits are being prepared, is each commit cohesive, reviewable, and named with a Conventional Commit subject?
