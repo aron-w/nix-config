@@ -1,3 +1,7 @@
+{ inputs, ... }:
+let
+  codexPkgFor = pkgs: inputs.codex-cli-nix.packages.${pkgs.system}.default;
+in
 {
   flake.modules.nixos."features-coding" =
     { pkgs, ... }:
@@ -15,7 +19,7 @@
         pkgs.xdg-utils
         pkgs.zip
 
-        pkgs.unstable.codex
+        (codexPkgFor pkgs)
         pkgs.unstable.nh
       ];
     };
@@ -38,7 +42,7 @@
         pkgs.uv
         pkgs.zoxide
 
-        pkgs.unstable.codex
+        (codexPkgFor pkgs)
       ];
 
       programs = {
