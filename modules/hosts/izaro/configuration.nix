@@ -1,5 +1,14 @@
 {
   flake.modules.nixos."hosts-izaro" = {
+    console = {
+      useXkbConfig = true;
+    };
+
+    services.xserver.xkb = {
+      layout = "us";
+      variant = "altgr-intl";
+    };
+
     networking = {
       hostName = "izaro";
       networkmanager.enable = true;
@@ -9,7 +18,6 @@
     time.timeZone = "Europe/Berlin";
 
     i18n.defaultLocale = "en_US.UTF-8";
-    console.keyMap = "us";
 
     sops.age.sshKeyPaths = [
       "/etc/ssh/ssh_host_ed25519_key"
