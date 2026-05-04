@@ -7,8 +7,14 @@
         pkgs.mangohud
         pkgs.moonlight-qt
         pkgs.protonup-qt
+        pkgs.protontricks
         pkgs.steam-run
+        pkgs.vulkan-tools
+        pkgs.wineWowPackages.staging
+        pkgs.winetricks
       ];
+
+      hardware.steam-hardware.enable = true;
 
       programs = {
         appimage = {

@@ -32,6 +32,7 @@ Record structural choices here before future agents change them.
 
 - `exile`: main/gaming machine.
 - `dominus`: first home server.
+- `izrao`: current Windows gaming and coding workstation being migrated to NixOS.
 - `wsl-home`: personal NixOS-WSL environment.
 - `wsl-work`: work NixOS-WSL environment.
 
@@ -42,3 +43,5 @@ Record structural choices here before future agents change them.
 - `dominus` uses Plasma 6 Wayland as default and Hyprland as an optional session because GTX 1060/NVIDIA/Pascal is a higher-risk Hyprland target than `exile`.
 - `exile` is expected to be the better future Hyprland-first target because it has an AMD RX 6700 XT.
 - `dominus` uses SSH-key-only remote login for `aron`; the local password is set on the machine and not stored in Git.
+- `izrao` uses UEFI, systemd-boot, AMD CPU microcode, AMDGPU, 32-bit graphics for Steam/Proton, Plasma as the reliable default desktop, and Hyprland as an optional power-user session.
+- `izrao` keeps the Disko target as a placeholder until the target SSD is verified from Linux by `/dev/disk/by-id`.

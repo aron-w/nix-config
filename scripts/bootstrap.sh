@@ -7,11 +7,13 @@ host="dominus"
 mode="auto"
 assume_yes=0
 wipes_disk=0
+install_disk=""
+install_disk_backup=""
 
 usage() {
   cat <<'USAGE'
 Usage:
-  bootstrap [--host dominus] [--checkout-dir PATH] [--repo-url URL] [--mode auto|auth|check|switch|test|dev|install] [--yes]
+  bootstrap [--host dominus] [--checkout-dir PATH] [--repo-url URL] [--mode auto|auth|check|switch|test|dev|install|install-wizard] [--install-disk /dev/disk/by-id/... ] [--yes]
 
 Modes:
   auto     Clone/update the repo, check the flake, switch on NixOS, otherwise prepare the dev shell.
@@ -21,6 +23,7 @@ Modes:
   test     Run sudo nixos-rebuild test --flake .#HOST.
   dev      Clone/update the repo and realise the dev shell.
   install  From the NixOS installer only: run Disko, nixos-install, and prompt for the user password.
+  install-wizard  Installer helper: list disks, ask for a /dev/disk/by-id target, then run install.
 
 Destructive install mode requires:
   --i-understand-this-wipes-the-disk
@@ -45,6 +48,10 @@ while [ "$#" -gt 0 ]; do
       mode="$2"
       shift 2
       ;;
+    --install-disk)
+      install_disk="$2"
+      shift 2
+      ;;
     --yes|-y)
       assume_yes=1
       shift
@@ -66,7 +73,7 @@ while [ "$#" -gt 0 ]; do
 done
 
 case "$mode" in
-  auto|auth|check|switch|test|dev|install) ;;
+  auto|auth|check|switch|test|dev|install|install-wizard) ;;
   *)
     echo "Unsupported mode: $mode" >&2
     usage >&2
@@ -128,6 +135,76 @@ is_nixos_installer() {
   grep -qi "installer" /etc/os-release 2>/dev/null || [ -e /iso ]
 }
 
+host_disk_module() {
+  printf "%s/modules/hosts/%s/disk.nix" "$checkout_dir" "$host"
+}
+
+restore_install_disk_override() {
+  if [ -n "$install_disk_backup" ] && [ -e "$install_disk_backup" ]; then
+    mv "$install_disk_backup" "$(host_disk_module)"
+    install_disk_backup=""
+  fi
+}
+
+list_install_disks() {
+  if command -v lsblk >/dev/null 2>&1; then
+    echo "Visible disks:"
+    lsblk -d -o NAME,SIZE,MODEL,SERIAL,TRAN,TYPE
+    echo
+  fi
+
+  if [ -d /dev/disk/by-id ]; then
+    echo "Candidate /dev/disk/by-id entries:"
+    find /dev/disk/by-id -maxdepth 1 -type l ! -name '*-part*' | sort
+    echo
+  fi
+}
+
+prompt_for_install_disk() {
+  local reply
+
+  list_install_disks
+
+  while :; do
+    printf "Target install disk (/dev/disk/by-id/...): "
+    read -r reply
+
+    if [ -z "$reply" ]; then
+      echo "Install disk cannot be empty." >&2
+      continue
+    fi
+
+    if [ ! -e "$reply" ]; then
+      echo "Path does not exist: $reply" >&2
+      continue
+    fi
+
+    install_disk="$reply"
+    break
+  done
+}
+
+prepare_install_disk_override() {
+  local disk_module
+
+  disk_module="$(host_disk_module)"
+
+  if [ ! -f "$disk_module" ]; then
+    echo "Host disk module not found: $disk_module" >&2
+    exit 1
+  fi
+
+  if [ -z "$install_disk" ]; then
+    return 0
+  fi
+
+  install_disk_backup="$(mktemp "${TMPDIR:-/tmp}/bootstrap-disk.XXXXXX")"
+  cp "$disk_module" "$install_disk_backup"
+  trap restore_install_disk_override EXIT
+
+  sed -i "s|default = \".*\";|default = \"$install_disk\";|" "$disk_module"
+}
+
 run_check() {
   echo "Checking flake"
   "${nix_cmd[@]}" flake check "$checkout_dir"
@@ -163,7 +240,13 @@ MSG
     confirm "This does not look like the NixOS installer. Continue anyway?"
   fi
 
+  if [ -n "$install_disk" ]; then
+    echo "Install target: $install_disk"
+  fi
+
   confirm "Disko will wipe and repartition the configured target disk. Continue?"
+
+  prepare_install_disk_override
 
   echo "Running Disko for $host"
   sudo "${nix_cmd[@]}" run github:nix-community/disko/latest -- --mode disko --flake "$(flake_ref)"
@@ -245,6 +328,11 @@ case "$mode" in
     run_rebuild switch
     ;;
   install)
+    run_check
+    run_install
+    ;;
+  install-wizard)
+    prompt_for_install_disk
     run_check
     run_install
     ;;

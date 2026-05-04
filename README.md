@@ -18,6 +18,20 @@ Fresh `dominus` install from the NixOS installer USB, after verifying the target
 nix --extra-experimental-features "nix-command flakes" run github:aron-w/nix-config#bootstrap -- --mode install --host dominus --yes --i-understand-this-wipes-the-disk
 ```
 
+Fresh `izrao` install notes, including direct SSD and external SSD bootstrap paths: [docs/izrao-install.md](docs/izrao-install.md).
+
+Fresh `izrao` install with the disk-selection wizard:
+
+```sh
+nix --extra-experimental-features "nix-command flakes" run github:aron-w/nix-config#bootstrap -- --mode install-wizard --host izrao --yes --i-understand-this-wipes-the-disk
+```
+
+Short wrapper for the same `izrao` install flow from a NixOS installer or another Linux system with Nix:
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/aron-w/nix-config/main/scripts/install-izrao.sh | sh
+```
+
 After the first graphical login, finish 1Password Git SSH setup:
 
 ```sh
@@ -49,18 +63,20 @@ The first Nix command may update `flake.lock` when inputs change. Commit it afte
 
 ## Current Host Targets
 
+- `izrao`: current Windows gaming and coding workstation target.
 - `exile`: main/gaming machine.
 - `dominus`: workstation POC for the future home server.
 - `wsl-home`: personal NixOS-WSL environment.
 - `wsl-work`: work NixOS-WSL environment.
 
-`dominus` is the current concrete `nixosConfiguration`. `exile`, `wsl-home`, and `wsl-work` remain planned targets. Add or change host outputs only after collecting the machine's hostname, architecture, users, boot mode, disk strategy, hardware config, secrets policy, and activation workflow.
+`dominus` and `izrao` are the current concrete `nixosConfigurations`. `exile`, `wsl-home`, and `wsl-work` remain planned targets. Add or change host outputs only after collecting the machine's hostname, architecture, users, boot mode, disk strategy, hardware config, secrets policy, and activation workflow.
 
 ## Documentation
 
 - [Architecture](docs/architecture.md)
 - [Hosts](docs/hosts.md)
 - [Tooling](docs/tooling.md)
+- [Izrao install](docs/izrao-install.md)
 - [Secrets](docs/secrets.md)
 - [Verification](docs/verification.md)
 - [AI workflow](docs/ai-workflow.md)
