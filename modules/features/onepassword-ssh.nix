@@ -10,6 +10,12 @@
         user = "git";
         identityAgent = "~/.1password/agent.sock";
       };
+
+      ssh.matchBlocks."pi" = {
+        hostname = "pi";
+        user = "aron";
+        identityAgent = "~/.1password/agent.sock";
+      };
     };
   };
 }
