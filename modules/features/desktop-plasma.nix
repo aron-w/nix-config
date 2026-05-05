@@ -9,6 +9,7 @@
 
         systemPackages = [
           pkgs.firefox
+          pkgs.unstable.vesktop
         ];
       };
 
