@@ -35,6 +35,11 @@
         };
       };
 
+      hardware.logitech.wireless = {
+        enable = true;
+        enableGraphical = true;
+      };
+
       security = {
         polkit.enable = true;
         rtkit.enable = true;
