@@ -20,6 +20,7 @@ in
       nixosModules."features-gaming"
       nixosModules."features-remote-access"
       nixosModules."features-ssh"
+      nixosModules."features-terminal-power-user"
 
       nixosModules."hosts-dominus"
       nixosModules."hosts-dominus-disk"
@@ -32,6 +33,7 @@ in
             homeModules."features-coding"
             homeModules."features-onepassword-ssh"
             homeModules."features-ssh"
+            homeModules."features-terminal-power-user"
             homeModules."hosts-dominus-aron"
           ];
         };

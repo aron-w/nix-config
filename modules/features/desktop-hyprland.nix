@@ -27,6 +27,7 @@
           pkgs.slurp
           pkgs.waybar
           pkgs.wl-clipboard
+          pkgs.xdg-utils
           pkgs.wofi
         ];
       };

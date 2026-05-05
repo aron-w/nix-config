@@ -11,6 +11,9 @@
           pkgs.firefox
           pkgs.unstable.spotify
           pkgs.unstable.vesktop
+          pkgs.wl-clipboard
+          pkgs.xclip
+          pkgs.xdg-utils
         ];
       };
 

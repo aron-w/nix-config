@@ -18,9 +18,9 @@ in
       nixosModules."features-desktop-hyprland"
       nixosModules."features-desktop-plasma"
       nixosModules."features-gaming"
-      nixosModules."features-power-user"
       nixosModules."features-ssh"
       nixosModules."features-remote-access"
+      nixosModules."features-terminal-power-user"
 
       nixosModules."hosts-izaro"
       nixosModules."hosts-izaro-disk"
@@ -32,8 +32,8 @@ in
           imports = [
             homeModules."features-coding"
             homeModules."features-onepassword-ssh"
-            homeModules."features-power-user"
             homeModules."features-ssh"
+            homeModules."features-terminal-power-user"
             homeModules."hosts-izaro-aron"
           ];
         };

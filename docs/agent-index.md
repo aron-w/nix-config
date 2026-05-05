@@ -20,7 +20,7 @@ Use this as the first repo map after `AGENTS.md`. Read deeper docs only when the
 - Unstable overlay definition: `modules/nix/unstable-overlay.nix`.
 - Shared desktop GUI packages: `modules/features/desktop-plasma.nix`.
 - Coding tools: `modules/features/coding.nix`.
-- General power-user CLI tools: `modules/features/power-user.nix`.
+- General terminal power-user CLI tools: `modules/features/terminal-power-user.nix`.
 - Gaming packages/settings: `modules/features/gaming.nix`.
 
 ## Host Status
