@@ -1,6 +1,26 @@
 {
   "nix.enableLanguageServer": true,
   "nix.serverPath": "nixd",
+  "nix.serverSettings": {
+    "nixd": {
+      "nixpkgs": {
+        "expr": "import (builtins.getFlake \"${workspaceFolder}\").inputs.nixpkgs { system = builtins.currentSystem; }"
+      },
+      "formatting": {
+        "command": [
+          "nixfmt"
+        ]
+      },
+      "options": {
+        "nixos": {
+          "expr": "(builtins.getFlake \"${workspaceFolder}\").nixosConfigurations.izaro.options"
+        },
+        "home-manager": {
+          "expr": "(builtins.getFlake \"${workspaceFolder}\").nixosConfigurations.izaro.options.home-manager.users.type.getSubOptions []"
+        }
+      }
+    }
+  },
   "[nix]": {
     "editor.defaultFormatter": "jnoortheen.nix-ide",
     "editor.formatOnSave": false
