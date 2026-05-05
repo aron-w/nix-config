@@ -23,6 +23,18 @@
       "/etc/ssh/ssh_host_ed25519_key"
     ];
 
+    zramSwap = {
+      enable = true;
+      memoryPercent = 100;
+    };
+
+    swapDevices = [
+      {
+        device = "/var/lib/swapfile";
+        size = 16 * 1024;
+      }
+    ];
+
     services.fwupd.enable = true;
 
     system.stateVersion = "25.11";
