@@ -20,6 +20,7 @@ in
       nixosModules."features-gaming"
       nixosModules."features-power-user"
       nixosModules."features-ssh"
+      nixosModules."features-remote-access"
 
       nixosModules."hosts-izaro"
       nixosModules."hosts-izaro-disk"
