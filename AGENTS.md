@@ -4,7 +4,7 @@ This repo is a personal NixOS, NixOS-WSL, Home Manager, and secret management co
 
 ## Read First
 
-- Use `.codex/skills/conventional-commits` whenever the user asks to commit changes or prepare git history.
+- Use `.codex/skills/conventional-commits` whenever creating commits or preparing git history.
 - When creating commits, split work by coherent reviewable intent so each commit is easy to review, revert, or bisect.
 - Start with [docs/decisions.md](docs/decisions.md).
 - Use [docs/architecture.md](docs/architecture.md) before changing repo structure.
@@ -30,6 +30,7 @@ This repo is a personal NixOS, NixOS-WSL, Home Manager, and secret management co
 - Expose reusable lower-level modules through `flake.modules.nixos.*` and `flake.modules.homeManager.*`.
 - Keep host-specific facts under `modules/hosts/<name>/`.
 - Keep `README.md` concise for humans. Put durable conventions in `docs/`.
+- When code, configuration, or documentation changes are complete and verification has passed, create focused Conventional Commits without waiting for an explicit commit request, unless the user says not to commit.
 - Prefer one Conventional Commit per cohesive change. Do not bundle unrelated fixes, docs, and refactors into one commit when they can be reviewed independently.
 - Do not run destructive git commands unless the user explicitly asks.
 - After structural changes, run `nix fmt` and `nix flake check` when Nix is available.
