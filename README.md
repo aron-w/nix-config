@@ -80,6 +80,7 @@ The first Nix command may update `flake.lock` when inputs change. Commit it afte
 - [Secrets](docs/secrets.md)
 - [Verification](docs/verification.md)
 - [AI workflow](docs/ai-workflow.md)
+- [Agent index](docs/agent-index.md)
 - [Decisions](docs/decisions.md)
 
 ## Core Policy

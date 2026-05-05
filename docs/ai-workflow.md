@@ -4,14 +4,14 @@ The repo uses durable documentation plus a thin `AGENTS.md`.
 
 `AGENTS.md` exists because many coding agents discover it automatically. The long-lived source of truth should stay in `docs/` so the project remains usable across Codex, Cursor, Copilot, local scripts, and future tools.
 
+For token efficiency, agents should treat `AGENTS.md` as the routing layer and `docs/agent-index.md` as the compact repo map. Deeper docs are task-specific and should be read only when the change routes there.
+
 ## Agent Expectations
 
-- Read `docs/decisions.md` before changing structure.
-- Read `docs/hosts.md` before adding host outputs.
 - Prefer small, reviewable changes.
-- Use the `conventional-commits` skill when preparing commits or history.
-- Split commits by reviewable intent. Each cohesive change should usually land in its own Conventional Commit so rollback, review, and `git bisect` stay practical.
-- Validate with `nix fmt` and `nix flake check` when Nix is available.
+- Use the `conventional-commits` skill when the user asks for commits, history preparation, or publishing.
+- Split requested commits by reviewable intent so rollback, review, and `git bisect` stay practical.
+- Match verification to the risk and scope described in `AGENTS.md` and `docs/verification.md`.
 - Never invent host facts, usernames, SSH keys, disks, or secrets.
 
 ## Prompting Pattern
@@ -32,4 +32,4 @@ Good future requests should include:
 - Are unstable packages explicit?
 - Are secrets encrypted or documented as intentionally absent?
 - Do docs and commands still match the implementation?
-- If commits are being prepared, is each commit cohesive, reviewable, and named with a Conventional Commit subject?
+- If commits were requested, is each commit cohesive, reviewable, and named with a Conventional Commit subject?

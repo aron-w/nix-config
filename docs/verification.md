@@ -2,6 +2,13 @@
 
 Use the strongest verification available from the machine you are on.
 
+## Scope
+
+- Docs-only: no Nix check required unless commands, examples, or module semantics changed.
+- Package or feature module changes: run `nix fmt` and `nix flake check`.
+- Host, boot, disk, secrets, or activation changes: read the relevant doc first, then run `nix fmt`, `nix flake check`, and host-specific rebuild/test when available.
+- Structural changes: run `nix fmt` and `nix flake check`.
+
 ## From Windows With Docker Desktop
 
 The Docker workflow is useful before a local Nix install exists.
