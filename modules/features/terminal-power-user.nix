@@ -53,6 +53,10 @@
         pkgs.zoxide
       ];
 
+      home.shellAliases = {
+        lg = "lazygit";
+      };
+
       programs = {
         bash.enable = true;
         btop.enable = true;

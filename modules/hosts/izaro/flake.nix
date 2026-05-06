@@ -31,6 +31,7 @@ in
         home-manager.users.aron = {
           imports = [
             homeModules."features-coding"
+            homeModules."features-neovim"
             homeModules."features-onepassword-ssh"
             homeModules."features-ssh"
             homeModules."features-terminal-power-user"
