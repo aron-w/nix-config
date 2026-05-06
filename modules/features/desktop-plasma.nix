@@ -9,6 +9,7 @@
 
         systemPackages = [
           pkgs.firefox
+          pkgs.piper
           pkgs.unstable.spotify
           pkgs.unstable.vesktop
           pkgs.wl-clipboard
@@ -17,7 +18,14 @@
         ];
       };
 
+      boot.kernelModules = [
+        "hid_logitech_dj"
+        "hid_logitech_hidpp"
+      ];
+
       services = {
+        ratbagd.enable = true;
+
         xserver.enable = true;
 
         displayManager.sddm = {
