@@ -9,7 +9,9 @@
 
         systemPackages = [
           pkgs.firefox
+          pkgs.v4l-utils
           pkgs.piper
+          pkgs.unstable.cameractrls-gtk4
           pkgs.unstable.spotify
           pkgs.unstable.vesktop
           pkgs.wl-clipboard
